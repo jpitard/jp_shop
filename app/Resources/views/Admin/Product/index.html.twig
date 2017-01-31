@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+{% endblock %}
+
+{% block titleContent %}{{ 'menu.tab_de_bord' | trans }} <small> </small>{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active"> <a href="{{ path('admin.products') }}"> {{ 'menu.produit' | trans }} </a> </li>
+{% endblock %}
+{% block content %}
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    <div class="box box-info">
+       {{ dump(produits) }}
+
+    </div>
+
+
+{% endblock %}

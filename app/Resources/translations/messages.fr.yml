@@ -1,0 +1,30 @@
+messages:
+    homepage: Bienvenue
+
+menu:
+    tab_de_bord: tableau de bord
+    catalogue: catalogue
+    commande: commandes
+    client: clients
+    apparence: apparence
+    paiement: paiement
+    parametre: pamètre de la boutique
+    produit: produits
+    categorie: catégorie
+    marque: mark
+    facture: factures
+    adresse: adresses
+    theme: themes
+    image: images
+    modes_de_paiement: mode de paiement
+    preference: preferences
+    vendre: vendre
+    personnaliser: personnaliser
+    configurer: configurer
+    general: général
+
+
+
+
+
+

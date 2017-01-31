@@ -1,0 +1,87 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titleFR", type="string", length=255)
+     */
+    private $titleFR;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titleEN", type="string", length=255)
+     */
+    private $titleEN;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descriptionFR", type="text")
+     */
+    private $descriptionFR;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descriptionEN", type="text")
+     */
+    private $descriptionEN;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="priceHT", type="float", nullable=true)
+     */
+    private $priceHT;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    private $quantity;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
+
+}

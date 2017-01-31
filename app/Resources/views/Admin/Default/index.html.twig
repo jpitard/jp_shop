@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+{% endblock %}
+
+{% block titleContent %}{{ 'menu.tab_de_bord' | trans }} <small> </small>{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+
+{% endblock %}
+{% block content %}
+
+
+    <div class="box box-info">
+        <P>{{ 'messages.homepage'|trans }}</P>
+        {{ 'menu.tab_de_bord' | trans }}
+
+    </div>
+
+
+{% endblock %}

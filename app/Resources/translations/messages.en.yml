@@ -1,0 +1,25 @@
+messages:
+    homepage: Welcome
+
+menu:
+    tab_de_bord: dashboard
+    catalogue: catalog
+    commande: orders
+    client: customers
+    apparence: appearance
+    paiement: payment
+    parametre: shop setting
+    produit: products
+    categorie: categories
+    mark: mark
+    facture: invoice
+    adresse: addresses
+    theme: themes
+    image: pictures
+    modes de paiement: payment method
+    preference: preferences
+    vendre: sale
+    personnaliser: personalize
+    configurer: configure
+    general: general
+

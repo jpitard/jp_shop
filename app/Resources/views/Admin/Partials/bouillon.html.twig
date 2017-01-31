@@ -1,0 +1,84 @@
+{% set json = {
+'menu.tab_de_bord': [
+{
+'intitule_onglet': 'menu.tab_de_bord',
+'lien': 'admin.homepage',
+'icone': 'dashboard',
+'sous_onglet': ''
+}
+],
+
+'menu.vendre':[
+
+    {
+    'intitule_onglet': 'menu.catalogue',
+    'lien': '',
+    'icone': '',
+    'sous_onglet': [
+    {'intitule_onglet': 'menu.produit', 'lien':'admin.produits','icone': 'barcode'},
+    {'intitule_onglet': 'menu.categorie', 'lien':'admin.categories','icone': 'th-list'},
+    {'intitule_onglet': 'menu.marque', 'lien':'admin.marques','icone': 'wrench'}
+]
+},
+{
+'intitule_onglet': 'menu.commande',
+'lien':'admin.commandes',
+'icone': 'shopping-bag',
+'sous_onglet': [
+{'intitule_onglet': 'menu.commande', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.facture', 'lien':'','icone': ''}
+]
+
+},
+{
+'intitule_onglet': 'menu.client',
+'lien':'admin.clients',
+'icone': 'group',
+'sous_onglet': [
+{'intitule_onglet': 'menu.client', 'lien':'admin.clients','icone': 'user'},
+{'intitule_onglet': 'menu.adresse', 'lien':'','icone': ''}
+
+]
+}
+],
+
+'menu.personnaliser':[
+{
+'intitule_onglet': 'menu.apparence',
+'lien':'',
+'icone': '',
+'sous_onglet': [
+{'intitule_onglet': 'menu.theme', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.image', 'lien':'','icone': ''}
+
+]
+},
+{
+'intitule_onglet': 'menu.paiement',
+'lien':'',
+'icone': '',
+'sous_onglet': [
+{'intitule_onglet': 'menu.modes_de_paiement', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.preference', 'lien':'','icone': ''},
+
+]
+},
+
+],
+'menu.configurer':[
+{
+'intitule_onglet': 'menu.parametre',
+'lien':'',
+'icone': 'cog',
+'sous_onglet': [
+{'intitule_onglet': 'menu.general', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.commande', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.produit', 'lien':'','icone': ''},
+{'intitule_onglet': 'menu.client', 'lien':'','icone': ''}
+
+]
+}
+
+],
+
+} %}
