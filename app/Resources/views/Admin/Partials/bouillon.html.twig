@@ -82,3 +82,61 @@
 ],
 
 } %}
+
+{#public function newAction(Request $request)#}
+{#{#}
+
+{#$serviceUtils=$this->get('app.service.utils.arrayname');#}
+
+{#//die(dump($serviceUtils->generateArrayNameComposer()));#}
+
+{#$product = new Product();#}
+{#$formProduct = $this->createForm(ProductType::class, $product);#}
+
+{#//die(dump($formProduct->getData()));#}
+
+{#$formProduct->handleRequest($request);#}
+{#//die(dump($formProduct->getData()));#}
+{#if ($formProduct->isSubmitted() && $formProduct->isValid()) {#}
+{#// sauvegarde du produit#}
+{#$em = $this->getDoctrine()->getManager();#}
+
+
+
+{#/* TEST SERVICE*/#}
+{#$images = $product->getImages();#}
+{#//die(dump($images->getCover()));#}
+{#$tabNameImage=[];#}
+{#// $serviceUtils = $this->get('app.service.utils.arrayname');#}
+{#foreach ($images as $image) {#}
+{#//die(dump($image->getLibelle()));#}
+{#// $imageLibelle=$image->getLibelle();#}
+{#$fileName = $serviceUtils->generateUniqId().'.'.$image->getLibelle()->guessExtension();#}
+{#$tabNameImage[]=$fileName;#}
+{#}#}
+
+{#//$serviceUpload = $this->get('app.service.upload');#}
+{#foreach ($tabNameImage as $key=>$item) {#}
+{#$images[$key]->getLibelle->move($this->getParameter('products_directory'),$item );#}
+{#//die(dump($item, $tabNameImage[$key] ));#}
+{#//  move($tabNameImage[$key],'/upload');#}
+{#/* $image = new Image();#}
+{#$image->setLibelle($tabNameImage[$key]);#}
+{#$product->addImage($tabNameImage[$key]);*/#}
+{#}#}
+
+
+{#// die(dump($product));#}
+
+
+{#//$em->persist($product);#}
+{#//$em->flush();#}
+{#$this->addFlash('success', 'Votre produit a bien été ajouté');#}
+{#return $this->redirectToRoute('admin.product.new');#}
+{#}#}
+{#return $this->render('Admin/Product/new.html.twig',#}
+{#[#}
+{#'formProduct' => $formProduct->createView()#}
+{#]#}
+{#);#}
+{#}#}

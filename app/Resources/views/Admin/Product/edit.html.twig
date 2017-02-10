@@ -1,0 +1,280 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        /* css adminLTE*/
+        .box-header {
+            padding: 1px;
+        }
+
+        /* Tabs panel */
+        .tabbable-panel {
+
+        }
+
+        /* Default mode */
+        .tabbable-line > .box-header > .nav-tabs {
+            border: none;
+            margin: 0px;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li {
+            margin-right: 10px;
+
+        }
+        .tabbable-line > .box-header > .nav-tabs > li > a {
+
+            border: 0;
+            margin-right: 0;
+            color: #737373;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li > a > i {
+            color: #6c868e;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover > a {
+            border: 0;
+            background: none !important;
+            color: #333333;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover {
+            border-bottom: 3px solid #25b9d7;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover > a > i {
+            color: #a6a6a6;
+        }
+
+        .tabbable-line > .box-header > .nav-tabs > li.active {
+            border-bottom: 3px solid #25b9d7;
+            position: relative;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li.active > a {
+            border: 0;
+            color: #333333;
+        }
+
+        /************************************
+        *** GESTION IMAGE PRODUIT **********
+        *************************************/
+        #product-images-container {
+            border: 1px solid #bbcdd2;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+        }
+
+
+
+    </style>
+{% endblock %}
+
+{% block titleContent %}{{ 'product.add_product' | trans|capitalize }} <small> </small>{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class=""> <a href="{{ path('admin.products') }}"> {{ 'menu.produit' | trans|capitalize }} </a>
+    <li class="active"> {{ 'general.button.edit' | trans|capitalize }} </li>
+{% endblock %}
+{% block content %}
+    {# Affichage du message de success	#}
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {#{{ form(formContact) }}#}
+    {#{{ dump(formProduct) }}#}
+
+
+    <div class="box box-info">
+        {{ form_start(formProduct, {attr: {novalidate: "novalidate", class:"form-horizontal"}}) }}
+        <div class="tabbable-panel">
+            <div class="tabbable-line">
+                <div class="box-header with-border">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_default_title" data-toggle="tab">{{ 'general.title'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#tab_description" data-toggle="tab">{{ 'general.description'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#tab_essential" data-toggle="tab">{{ 'general.essential'|trans|capitalize }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-body ">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_default_title">
+                            <div class="form-group">
+                                {{ form_errors(formProduct.titleFR) }}
+                                {{ form_label(formProduct.titleFR,"TitreFR",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.titleFR,
+                                    {
+                                        attr:{ class: " form-control" },
+                                        id: "appbundle_product_titleFR"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(formProduct.titleEN) }}
+                                {{ form_label(formProduct.titleFR,"TitleEN",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.titleEN,
+                                    {
+                                        attr:{ class: " form-control" },
+                                        id: "appbundle_product_titleEN"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane " id="tab_description">
+                            <div class="form-group ">
+                                {{ form_errors(formProduct.descriptionFR) }}
+                                {{ form_label(formProduct.descriptionFR, "DescriptionFR",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.descriptionFR,
+                                    {
+                                        attr:{
+                                        placeholder: "Entrez...",
+                                        class: "form-control",
+                                        rows: "3"
+                                    },
+                                        id: "appbundle_product_descriptionFR"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                {{ form_errors(formProduct.descriptionEN) }}
+                                {{ form_label(formProduct.descriptionEN, "DescriptionEN",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.descriptionEN,
+                                    {
+                                        attr:{
+                                        placeholder: "Entrez...",
+                                        class: "form-control",
+                                        rows: "3"
+                                    },
+                                        id: "appbundle_product_descriptionEN"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="tab_essential">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div id="product-images-container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Aspernatur, aut beatae, consequatur corporis deleniti explicabo nesciunt obcaecati odio provident,
+                                        quidem repellendus suscipit? Aliquam,
+                                        asperiores assumenda consequuntur molestiae necessitatibus temporibus totam.
+                                    </div>
+
+                                </div>
+                               <div class="col-sm-4">
+                                   <div class="form-group">
+                                       {{ form_errors(formProduct.priceHT) }}
+                                       {{ form_label(formProduct.priceHT,'product.price'|trans|capitalize,
+                                       {
+                                           label_attr:{ class:"col-sm-2 control-label" }
+                                       })
+                                       }}
+
+                                       <div class="col-sm-10">
+                                           {{ form_widget(formProduct.priceHT,
+                                           {
+                                               attr:{ class: " form-control"},
+                                               id: "appbundle_product_price"
+                                           })
+                                           }}
+                                       </div>
+
+                                   </div>
+                                   <div class="form-group">
+                                       {{ form_errors(formProduct.quantity) }}
+                                       {{ form_label(formProduct.quantity,'product.quantity'|trans|capitalize,
+                                       {
+                                           label_attr:{ class:"col-sm-2 control-label" }
+                                       })
+                                       }}
+
+                                       <div class="col-sm-10">
+                                           {{ form_widget(formProduct.quantity,
+                                           {
+                                               attr:{class: "form-control"},
+                                               id: "appbundle_product_quantity"
+                                           })
+                                           }}
+                                       </div>
+                                   </div>
+
+                                   <div class="form-group">
+                                       <div class="col-sm-offset-2 col-sm-10" >
+                                           <div class="checkbox">
+                                               {{ form_widget(formProduct.active,
+                                               {
+                                                   id: "appbundle_product_active"
+                                               })
+                                               }} Active
+                                           </div>
+                                       </div>
+                                   </div>
+
+                               </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-info">{{ 'general.button.edit'|trans|capitalize }}</button>
+                    <a class="btn btn-default" href="{{ path('admin.products')}}">
+                        <i class="fa fa-list"></i>{{ 'general.button.back_to_list'|trans|capitalize }}
+                    </a>
+                    <a class="btn btn-danger" href="{{ url('admin.product.delete', { id: product.id } ) }}">
+                        <i class="fa fa-trash-o"></i>{{ 'general.button.delete'|trans|capitalize }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{ form_end(formProduct) }}
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        CKEDITOR.replace( 'appbundle_product_descriptionFR');
+        CKEDITOR.replace( 'appbundle_product_descriptionEN' );
+
+    </script>
+{% endblock %}

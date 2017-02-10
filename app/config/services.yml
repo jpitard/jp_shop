@@ -11,3 +11,21 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
           - { name: twig.extension}
+
+    app.service.utils.arrayname:
+        class: AppBundle\Service\Utils\ArrayNameService
+
+    #bug à corriger
+    app.service.utils.lastinsertidbdd:
+        class: AppBundle\Service\Utils\LastInsertIdBDDService
+        #arguments: ["@doctrine.orm.entity_manager"]
+
+    app.service.upload:
+        class: AppBundle\Service\UploadService
+        arguments: ["@app.service.utils.arrayname", "%uploadDir%"]
+
+    app.listener.product:
+        class: AppBundle\Listener\ProductListener
+        arguments: ["@app.service.upload", "@app.service.utils.lastinsertidbdd" ]
+        tags:
+          - { name: doctrine.orm.entity_listener }

@@ -10,4 +10,29 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findProductByLocale($locale) {
+        $locale = mb_strtoupper($locale);
+        $results = $this
+            ->createQueryBuilder('p')
+            ->select('p.id', "p.title$locale AS title", "p.description$locale AS description", 'p.priceHT','p.quantity', 'p.active' )
+            ->getQuery()
+            ->getResult();
+        //die(dump($locale,$results));
+        return $results;
+    }
+
+    public function findProductByLocaleId($id, $locale) {
+        $locale = mb_strtoupper($locale);
+        $results = $this
+            ->createQueryBuilder('p')
+            ->select('p.id', "p.title$locale AS title", "p.description$locale AS description", 'p.priceHT','p.quantity', 'p.active' )
+            ->where('p.id = :id')
+            ->setParameters([
+                'id' => $id
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $results;
+    }
+
 }

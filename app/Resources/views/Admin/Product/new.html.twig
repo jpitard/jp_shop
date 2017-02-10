@@ -1,0 +1,307 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        /* css adminLTE*/
+        .box-header {
+            padding: 1px;
+        }
+
+        /* Tabs panel */
+        .tabbable-panel {
+
+        }
+
+        /* Default mode */
+        .tabbable-line > .box-header > .nav-tabs {
+            border: none;
+            margin: 0px;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li {
+            margin-right: 10px;
+
+        }
+        .tabbable-line > .box-header > .nav-tabs > li > a {
+            font-weight: 200px;
+            border: 0;
+            margin-right: 0;
+            color: #737373;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li > a > i {
+            color: #6c868e;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover > a {
+            border: 0;
+            background: none !important;
+            color: #333333;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover {
+            border-bottom: 3px solid #25b9d7;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li:hover > a > i {
+            color: #a6a6a6;
+        }
+
+        .tabbable-line > .box-header > .nav-tabs > li.active {
+            border-bottom: 3px solid #25b9d7;
+            position: relative;
+        }
+        .tabbable-line > .box-header > .nav-tabs > li.active > a {
+            border: 0;
+            color: #333333;
+        }
+
+        /*CSS CONTAINER IMAGE*/
+        .images{
+            border: 1px solid #bbcdd2;
+            width: 100%;
+            height: 250px;
+
+        }
+        .images li{
+
+        }
+
+
+
+    </style>
+{% endblock %}
+
+{% block titleContent %}{{ 'product.add_product' | trans|capitalize }} <small> </small>{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class=""> <a href="{{ path('admin.products') }}"> {{ 'menu.produit' | trans|capitalize }} </a>
+    <li class="active"> {{ 'general.button.new' | trans|capitalize }} </li>
+{% endblock %}
+{% block content %}
+    {# Affichage du message de success	#}
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+     {#{{ form(formContact) }}#}
+    {#{{ dump(formProduct) }}#}
+
+    <div class="box box-info">
+        {{ form_start(formProduct, {attr: {novalidate: "novalidate", class:"form-horizontal"}}) }}
+        <div class="tabbable-panel">
+            <div class="tabbable-line">
+                <div class="box-header with-border">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_default_title" data-toggle="tab">{{ 'general.title'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#tab_description" data-toggle="tab">{{ 'general.description'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#tab_essential" data-toggle="tab">{{ 'general.essential'|trans|capitalize }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-body ">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_default_title">
+                            <div class="form-group">
+                                {{ form_errors(formProduct.titleFR) }}
+                                {{ form_label(formProduct.titleFR,"TitreFR",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.titleFR,
+                                    {
+                                        attr:{ class: " form-control" },
+                                        id: "appbundle_product_titleFR"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(formProduct.titleEN) }}
+                                {{ form_label(formProduct.titleFR,"TitleEN",
+                                {
+                                    label_attr:{ class:"col-sm-2 control-label" }
+                                })
+                                }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(formProduct.titleEN,
+                                    {
+                                        attr:{ class: " form-control" },
+                                        id: "appbundle_product_titleEN"
+                                    })
+                                    }}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane " id="tab_description">
+
+
+                            <div id="desc_content">
+                                {{ form_errors(formProduct.descriptionFR) }}
+                                {{ form_errors(formProduct.descriptionEN) }}
+                                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active"><a href="#appbundle_product_descriptionFR" data-toggle="tab">{{ form_label(formProduct.descriptionFR, "DescriptionFR")}}</a></li>
+                                    <li><a href="#appbundle_product_descriptionEN" data-toggle="tab">{{ form_label(formProduct.descriptionEN, "DescriptionEN")}}</a></li>
+                                </ul>
+                                <div id="my-tab-content" class="tab-content">
+
+                                        {{ form_widget(formProduct.descriptionFR,
+                                        {
+                                            attr:{
+                                            placeholder: "Entrez...",
+                                            class: "tab-pane active",
+                                            rows: "3"
+                                        },
+                                            id: "appbundle_product_descriptionFR"
+                                        })
+                                        }}
+
+                                        {{ form_widget(formProduct.descriptionEN,
+                                        {
+                                            attr:{
+                                            placeholder: "Entrez...",
+                                            class: "tab-pane",
+                                            rows: "3"
+                                        },
+                                            id: "appbundle_product_descriptionEN"
+                                        })
+                                        }}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="tab_essential">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="images list-unstyled" data-prototype="{{ form_widget(formProduct.images.vars.prototype)|e('html_attr') }}">
+
+                                    </ul>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {{ form_errors(formProduct.priceHT) }}
+                                        {{ form_label(formProduct.priceHT,'product.price'|trans|capitalize,
+                                        {
+                                            label_attr:{ class:"col-sm-2 control-label" }
+                                        })
+                                        }}
+
+                                        <div class="col-sm-10">
+                                            {{ form_widget(formProduct.priceHT,
+                                            {
+                                                attr:{ class: " form-control"},
+                                                id: "appbundle_product_price"
+                                            })
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_errors(formProduct.quantity) }}
+                                        {{ form_label(formProduct.quantity,'product.quantity'|trans|capitalize,
+                                        {
+                                            label_attr:{ class:"col-sm-2 control-label" }
+                                        })
+                                        }}
+
+                                        <div class="col-sm-10">
+                                            {{ form_widget(formProduct.quantity,
+                                            {
+                                                attr:{class: "form-control"},
+                                                id: "appbundle_product_quantity"
+                                            })
+                                            }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10" >
+                                            <div class="checkbox">
+                                                {{ form_widget(formProduct.active,
+                                                {
+                                                    id: "appbundle_product_active"
+                                                })
+                                                }} Active
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-info">{{ ' Ajouter ' }}</button>
+                    <a class="btn btn-default" href="{{ path('admin.products')}}"><i class="fa fa-list"></i>{{ ' Retour à la liste ' }}</a>
+                </div>
+            </div>
+        </div>
+        {#{{ dump(formProduct.images) }}#}
+        {{ form_end(formProduct) }}
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        CKEDITOR.replace( 'appbundle_product_descriptionFR' );
+        CKEDITOR.replace( 'appbundle_product_descriptionEN' );
+        //CKEDITOR.replace( 'my-tab-content' );
+    </script>
+    <script>
+        var $addImagesLink = $('<a href="#" class="add_images_link ">{{ 'general.button.add_image'|trans|capitalize }}</a>');
+        var $newLinkLi = $('<li class="" ></li>').append($addImagesLink);
+
+        jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+            $collectionHolder = $('ul.images');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addImagesLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+{% endblock %}

@@ -19,4 +19,12 @@ class AdminDefaultController extends Controller
         return $this->render('Admin/Default/index.html.twig');
     }
 
+    /**
+     * @Route("/catalogue", name="admin.catalogue")
+     */
+    public function AdminCatalogueAction(Request $request)
+    {
+        //return $this->render('Admin/Default/index.html.twig');
+    }
+
 }

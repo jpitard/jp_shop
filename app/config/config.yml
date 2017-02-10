@@ -9,6 +9,8 @@ imports:
 parameters:
     locale: fr
     locales: [fr, en]
+    #uploadDir: upload/
+    uploadDir: '%kernel.root_dir%/../web/uploads'
 
 framework:
     #esi:             ~

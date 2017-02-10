@@ -9,10 +9,12 @@
 namespace AppBundle\DataFixtures\ORM;
 
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Product;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -36,11 +38,25 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
             $product->setDescriptionFR($faker->text(250));
             $product->setDescriptionEn($faker->text(250));
 
-            $product->setPriceHT($faker->randomFloat(2,0,1000));
+            $product->setPriceHT($faker->randomFloat(2,100,1000));
             $product->setQuantity($faker->randomDigit);
             $product->setActive(rand(0,1));
-            $product->setCreatedAT($faker->dateTime);
-            $product->setUpdatedAt($faker->dateTime);
+            //$product->setCreatedAT($faker->dateTime);
+            //$product->setUpdatedAt($faker->dateTime);
+
+            //$product->addImage($faker->imageUrl(800,800,'cats'));
+//            for ($i=0; $i<3; $i++){
+                $image = new Image();
+                $image->setLibelle(new UploadedFile($faker->image('',800,800)));
+                if ($i==0){
+                    $image->getCover(true);
+                }else{
+                    $image->getCover(false);
+                }
+                //$image->getCover();
+                $image->setProduct($product);
+                $product->addImage($image);
+//            }
 
             $manager->persist($product);
             $this->addReference('product'.$i, $product);

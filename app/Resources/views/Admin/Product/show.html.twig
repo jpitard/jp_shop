@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+
+
+
+    </style>
+{% endblock %}
+
+{% block titleContent %}{{ 'product.add_product' | trans|capitalize }} <small> </small>{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class=""> <a href="{{ path('admin.products') }}"> {{ 'menu.produit' | trans|capitalize }} </a>
+    <li class="active"> {{ 'general.button.new' | trans|capitalize }} </li>
+{% endblock %}
+{% block content %}
+    <div class="box box-info">
+
+        <div class="box-header with-border">
+            <h3 class="box-title"> {{ product.title }}</h3>
+        </div>
+
+        <div class="box-body ">
+            <dl class="dl-horizontal center ">
+                <dt>Titre</dt>
+                <dd>{{ product.title }}</dd>
+                <dt>Description</dt>
+                <dd>{{ product.description }}</dd>
+                <dt>Prix</dt>
+                <dd>{{ product.priceHT }}</dd>
+                <dt>Quantité</dt>
+                <dd>{{ product.quantity }}</dd>
+                <dt>Active</dt>
+
+                <dd>{{ product.active }}</dd>
+            </dl>
+        </div>
+
+        <div class="box-footer">
+            <span style="display: inline-block">
+                <a class="btn btn-primary" href="{{ path('admin.product.edit', { id: product.id } ) }}">
+                    <i class="fa fa-pencil"></i> {{ 'general.button.edit'|trans|capitalize }}
+                </a>
+                <a class="btn btn-default" href="{{ path('admin.products')}}">
+                    <i class="fa fa-list"></i> {{ 'general.button.back_to_list'|trans|capitalize }}
+                </a>
+                 <a class="btn btn-danger" href="{{ path('admin.product.delete', { id: product.id } ) }}">
+                     <i class="fa fa-trash-o"></i> {{ 'general.button.delete'|trans|capitalize }}
+                 </a>
+             </span>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+{% endblock %}

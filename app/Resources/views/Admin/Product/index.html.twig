@@ -3,9 +3,28 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+    <style>
+        .action_enabled{
+            color: #78d07d;
+        }
+        .action_disabled{
+            color: #c45c67;
+        }
+        .dropdown-item{
+            display: block;
+        }
+        .product .dropdown-item{
+            margin: 5px;
+        }
+        /*.dropdown>a{*/
+            /*margin: 5px;*/
+
+        /*}*/
+
+    </style>
 {% endblock %}
 
-{% block titleContent %}{{ 'menu.tab_de_bord' | trans }} <small> </small>{% endblock %}
+{% block titleContent %}{{ 'product.list_product' | trans|capitalize }} <small> </small>{% endblock %}
 
 {% block breadcrumb %}
     {{ parent() }}
@@ -17,10 +36,130 @@
             {{ flash_message }}
         </div>
     {% endfor %}
-    <div class="box box-info">
-       {{ dump(produits) }}
+       {#{{ dump(produits) }}#}
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-right"><a class="btn btn-success" href="{{ path('admin.product.new') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span>{{ 'product.button.new'  |trans|capitalize }} </span></a></p>
+                <div class=" box box-default">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-12 text-center">Statitisque 1</div>
+                        <div class="col-md-3 col-xs-12 text-center">Statitisque 2</div>
+                        <div class="col-md-3 col-xs-12 text-center">Statitisque 3</div>
+                        <div class="col-md-3 col-xs-12 text-center">Statitisque 4</div>
 
-    </div>
+                    </div>
+                </div>
+                <div class="box  box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ 'product.list_product' | trans }}</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'id' | upper }}</th>
+                                    <th>{{ 'general.title'|trans|upper }}</th>
+                                    <th>{{ 'product.price'|trans|upper }}</th>
+                                    <th>{{ 'product.quantity'|trans|upper }}</th>
+                                    <th>{{ 'active'|trans|upper }}</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {# Debut calcul de la moyenne des prix #}
 
+                            {#{% set moyenne_prix = "" %}#}
+                            {#{% set somme_prix = "" %}#}
+                            {#{% for produit in produits %}#}
+                                {#{% set  somme_prix = somme_prix + produit.price %}#}
+                            {#{% endfor %}#}
+                            {#{% set moyenne_prix =  somme_prix / produits|length %}#}
+                            {# Fin calcul de la moyenne des prix #}
+
+                            {#{% set moins_cher = 0 %}#}
+                            {#{% set array_prix = [] %}#}
+
+                            {% for key,produit in produits %}
+                                <tr>
+                                    {# debut traitement prix moins cher #}
+                                    {#{% set array_prix = array_prix | merge({(key) : produit.price}) %}#}
+                                    {#{%  set moins_cher = array_prix %}#}
+
+                                    {# fin traitement prix moins cher #}
+                                    <td>{{ produit.id }}</td>
+                                    <td>{{ produit.title }} </td>
+
+                                    <td>{{ produit.priceHT }}</td>
+                                    <td>{{ produit.quantity }}</td>
+                                    {% if produit.active == true %}
+                                        <td>
+                                            <a>
+                                                <i class="fa fa-check action_enabled"></i>
+                                            </a>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <a>
+                                                <i class="fa fa-close action_disabled"></i>
+                                            </a>
+                                        </td>
+                                    {% endif %}
+                                    <td>
+                                        <div class="btn-group-action product">
+                                            <div class="btn-group dropdown ">
+                                                <a class="pull-left " href="{{ path('admin.product.edit',{id: produit.id} ) }}" > <i class="fa fa-pencil"> </i> {{ ' '~'general.button.edit' | trans }} </a>
+                                                <a data-toggle="dropdown" aria-expanded="false"><i class="caret"></i></a>
+
+                                                <div class="dropdown-menu" dropdown-menu-right>
+                                                        <a class="dropdown-item" href="{{ path('admin.product.show',{id: produit.id} ) }}" ><i class="fa fa-eye"></i> {{ 'general.button.show' | trans }} </a>
+                                                        <a class="dropdown-item" href="{{ path('admin.product.delete',{id: produit.id}) }}">
+                                                            <i class="fa fa-trash-o"></i> {{ 'general.button.delete' | trans }}
+                                                        </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>{{ 'general.title'|trans|upper }}</th>
+                                <th>{{ 'product.price'|trans|upper }}</th>
+                                <th>{{ 'product.quantity'|trans|upper }}</th>
+                                <th>{{ 'active'|trans|upper }}</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer"></div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+        });
+    </script>
 
 {% endblock %}

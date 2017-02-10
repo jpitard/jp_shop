@@ -1,6 +1,19 @@
 messages:
     homepage: Bienvenue
 
+general:
+    title: titre
+    description: description
+    essential: essentiel
+    button:
+        new: nouveau
+        delete: supprimer
+        show: voir
+        edit: modifier
+        add: ajouter
+        back_to_list: retour à la liste
+        add_image: ajouter des images
+
 menu:
     tab_de_bord: tableau de bord
     catalogue: catalogue
@@ -22,6 +35,14 @@ menu:
     personnaliser: personnaliser
     configurer: configurer
     general: général
+
+product:
+    list_product: liste des produits
+    add_product: ajouter un nouveau produit
+    quantity: quantité
+    price: prix
+    button:
+        new: nouveau produit
 
 
 

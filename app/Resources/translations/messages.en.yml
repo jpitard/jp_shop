@@ -1,6 +1,20 @@
 messages:
     homepage: Welcome
 
+general:
+    title: title
+    description: description
+    essential: essential
+    button:
+        new: new
+        delete: delete
+        show: show
+        edit: edit
+        add: add
+        back_to_list: back to the list
+        add_image: add pictures
+
+
 menu:
     tab_de_bord: dashboard
     catalogue: catalog
@@ -22,4 +36,15 @@ menu:
     personnaliser: personalize
     configurer: configure
     general: general
+
+
+product:
+    list_product: list products
+    add_product: add new product
+    price: price
+    quantity: quantity
+    button:
+        new: new product
+
+
 

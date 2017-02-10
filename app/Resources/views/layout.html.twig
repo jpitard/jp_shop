@@ -83,7 +83,7 @@
         $(document).ready(function(){
 
 
-            var table = $('.table')
+           /* var table = $('.table')
             $('.table').on('click', '.btn-danger', function(event){
                 //console.log($(this))
                 event.preventDefault();
@@ -114,7 +114,7 @@
                     });
 
                 }
-            });
+            });*/
         });
 
         $(document).ready(function(){
@@ -492,13 +492,12 @@
                     }
                 ],
                 'menu.vendre':[
-
                     {
                         'intitule_onglet': 'menu.catalogue',
-                        'lien': 'admin.produits',
+                        'lien': 'admin.products',
                         'icone': '',
                         'sous_onglet': [
-                            {'intitule_onglet': 'menu.produit', 'lien':'admin.produits','icone': 'barcode'}
+                            {'intitule_onglet': 'menu.produit', 'lien':'admin.products','icone': 'barcode'}
                         ]
                     }
                 ]
@@ -535,30 +534,20 @@
                 <ul class="sidebar-menu">
                     {#{{ dump(app.request.attributes.get('_route')) }}#}
                     {% for title_onglet, onglet_principal in json %}
-                        {#{{ dump(path('admin.homepage')) }}#}
-
-                        <li class="header">{{ title_onglet | trans  }}</li>
+                        <li class="header">{{ title_onglet | trans |capitalize  }}</li>
                         {% for onglet in onglet_principal %}
-                            {{ dump(path(onglet.lien)) }}
                             <li {% if onglet.sous_onglet is defined %} {%  if onglet.lien == app.request.attributes.get('_route')  %}class="treeview active" {%  else %} class="treeview "  {% endif %} {% endif %}>
-                                <a href="{{  path( onglet.lien) }}">
+                                <a href="{{   path(onglet.lien) }}">
                                     <i class="fa fa-{{ onglet.icone }}"></i>
                                     <span>{{ onglet.intitule_onglet | trans }}</span> {% if onglet.sous_onglet is defined %}<i class="fa fa-angle-left pull-right"></i>{% endif %}
                                 </a>
                                 {% if onglet.sous_onglet is defined %}
                                     <ul class="treeview-menu">
                                         {% for sous_onglet in onglet.sous_onglet %}
-                                            <li>
-                                                <a href="{{ path(sous_onglet.lien)   }}">
+                                            <li {%  if sous_onglet.lien == app.request.attributes.get('_route')  %}class="active" {%  else %} class=" "  {% endif %}>
+                                                <a href="{{ path(sous_onglet.lien)  }}">
                                                     <i class="fa fa-{{ sous_onglet.icone }}"></i> {{ sous_onglet.intitule_onglet | trans }} {% if sous_onglet.sous_onglet is defined %}<i class="fa fa-angle-left pull-right"></i>{% endif %}
                                                 </a>
-                                                {% if sous_onglet.sous_onglet is defined %}
-                                                    <ul class="treeview-menu">
-                                                        {% for sous_sous_onglet in sous_onglet.sous_onglet %}
-                                                            <li><a href="{{ path( sous_sous_onglet.lien )  }}"><i class="fa fa-{{ sous_sous_onglet.icone }}"></i> {{ sous_sous_onglet.intitule_onglet | trans }}</a></li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                {% endif %}
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -588,6 +577,9 @@
                         <li><a href="{{ path('admin.homepage') }}">Home</a> </li>
                     {% endblock %}
                 </ol>
+            </section>
+            <section>
+                {% block headcontent %}{% endblock %}
             </section>
 
             <section class="content">
